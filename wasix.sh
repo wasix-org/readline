@@ -51,7 +51,7 @@ export LDFLAGS="\
 -Wl,--export=__tls_size \
 -Wl,--export=__tls_align \
 -Wl,--export=__tls_base \
--L $WASIX_NCURSES"
+-L $WASIX_NCURSES/lib"
 
 export LIBS="\
 -Wl,--shared-memory \
