@@ -36,7 +36,8 @@ export CFLAGS="\
 -DOPENSSL_THREADS \
 -O3 \
 -g \
--flto"
+-flto \
+-I $WASIX_NCURSES/include"
 export LDFLAGS="\
 -Wl,--shared-memory \
 -Wl,--max-memory=4294967296 \
@@ -49,7 +50,8 @@ export LDFLAGS="\
 -Wl,--export=__wasm_signal \
 -Wl,--export=__tls_size \
 -Wl,--export=__tls_align \
--Wl,--export=__tls_base"
+-Wl,--export=__tls_base \
+-L $WASIX_NCURSES"
 
 export LIBS="\
 -Wl,--shared-memory \
@@ -63,8 +65,9 @@ export LIBS="\
 -Wl,--export=__wasm_signal \
 -Wl,--export=__tls_size \
 -Wl,--export=__tls_align \
--Wl,--export=__tls_base"
+-Wl,--export=__tls_base \
+-l ncurses"
 
-bash_cv_func_sigsetjmp=missing ac_cv_func_chown_works=no ./configure --enable-static --disable-shared --target=wasm32-wasi --host=x86_64-pc-linux-gnux32
+bash_cv_func_sigsetjmp=missing ac_cv_func_chown_works=no ac_cv_header_termcap_h=yes ac_cv_lib_ncurses_tgetent=yes ./configure --enable-static --disable-shared --target=wasm32-wasi --host=x86_64-pc-linux-gnux32
 
 make -j4
